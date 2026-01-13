@@ -166,10 +166,14 @@ class PdfToImageView(ToolViewBase):
         if not self.selected_file:
             self.show_error("Please select a PDF file first")
             return
-            
-        if not self.output_folder:
+        
+        # Get output folder from entry widget
+        output_folder = self.output_entry.get()
+        if not output_folder:
             self.show_error("Please select an output folder")
             return
+        
+        self.output_folder = output_folder
         
         self.convert_btn.configure(state="disabled", text="Converting...")
         self.show_progress(True)
