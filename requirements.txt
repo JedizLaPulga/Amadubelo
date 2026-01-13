@@ -1,0 +1,19 @@
+# Amadubelo - All-in-One Utility Toolkit
+# Python 3.10+ required
+
+# ============ GUI ============
+customtkinter>=5.2.0          # Modern themed tkinter
+
+# ============ File Utilities ============
+pillow>=10.0.0                # Image processing
+pypdf>=3.0.0                  # PDF manipulation (merge, split)
+pdf2image>=1.16.0             # PDF to images (requires Poppler)
+python-docx>=1.0.0            # Read DOCX files
+reportlab>=4.0.0              # Create PDFs
+
+# ============ System Utilities ============
+psutil>=5.9.0                 # System info, processes, battery, network
+send2trash>=1.8.0             # Safe recycle bin operations
+
+# ============ Build ============
+pyinstaller>=6.0.0            # Create standalone .exe
