@@ -1,0 +1,2 @@
+# Amadubelo
+⚡ All‑in‑one offline file converter! 📂 Transform PDFs to images 🖼️, DOCX to PDF 📑, text to styled PDFs ✍️, and more. 🔒 Secure, fast, and powerful — with batch conversion, compression 📉, and a sleek drag‑and‑drop interface 🎨. Your Swiss‑army knife for files, no internet required 🚀." Would you like me to also draft a short tagline (like a catchy slogan) to pair with this description?
