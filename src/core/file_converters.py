@@ -32,32 +32,88 @@ def pdf_to_images(
     Returns:
         List of output image paths
     """
-    try:
-        from pdf2image import convert_from_path
-    except ImportError:
-        raise ImportError("pdf2image is required. Install with: pip install pdf2image")
-    
     # Create output folder
     os.makedirs(output_folder, exist_ok=True)
     
     # Get base name
     base_name = Path(pdf_path).stem
     
-    # Convert PDF to images
-    images = convert_from_path(pdf_path, dpi=dpi)
-    
-    output_files = []
-    total = len(images)
-    
-    for i, image in enumerate(images):
-        output_path = os.path.join(output_folder, f"{base_name}_page_{i+1}.{format}")
-        image.save(output_path, format.upper())
-        output_files.append(output_path)
+    # Try PyMuPDF first (doesn't require Poppler)
+    try:
+        import fitz  # PyMuPDF
         
-        if progress_callback:
-            progress_callback(i + 1, total)
+        doc = fitz.open(pdf_path)
+        output_files = []
+        total = len(doc)
+        
+        # Calculate zoom based on DPI (default PDF DPI is 72)
+        zoom = dpi / 72
+        matrix = fitz.Matrix(zoom, zoom)
+        
+        for i, page in enumerate(doc):
+            pix = page.get_pixmap(matrix=matrix)
+            output_path = os.path.join(output_folder, f"{base_name}_page_{i+1}.{format}")
+            pix.save(output_path)
+            output_files.append(output_path)
             
-    return output_files
+            if progress_callback:
+                progress_callback(i + 1, total)
+        
+        doc.close()
+        return output_files
+        
+    except ImportError:
+        pass  # PyMuPDF not installed, try pdf2image
+    
+    # Fallback to pdf2image (requires Poppler)
+    try:
+        from pdf2image import convert_from_path
+        from pdf2image.exceptions import PDFInfoNotInstalledError
+        
+        try:
+            images = convert_from_path(pdf_path, dpi=dpi)
+        except PDFInfoNotInstalledError:
+            raise RuntimeError(
+                "Poppler is not installed!\n\n"
+                "To use PDF to Image conversion, please install PyMuPDF:\n"
+                "   pip install pymupdf\n\n"
+                "Or install Poppler for Windows:\n"
+                "   1. Download from: https://github.com/oschwartz10612/poppler-windows/releases\n"
+                "   2. Extract to C:\\Program Files\\poppler\n"
+                "   3. Add C:\\Program Files\\poppler\\bin to your PATH"
+            )
+        except Exception as e:
+            if "poppler" in str(e).lower() or "Unable to get page count" in str(e):
+                raise RuntimeError(
+                    "Poppler is not installed!\n\n"
+                    "To use PDF to Image conversion, please install PyMuPDF:\n"
+                    "   pip install pymupdf\n\n"
+                    "Or install Poppler for Windows:\n"
+                    "   1. Download from: https://github.com/oschwartz10612/poppler-windows/releases\n"
+                    "   2. Extract to C:\\Program Files\\poppler\n"
+                    "   3. Add C:\\Program Files\\poppler\\bin to your PATH"
+                )
+            raise
+        
+        output_files = []
+        total = len(images)
+        
+        for i, image in enumerate(images):
+            output_path = os.path.join(output_folder, f"{base_name}_page_{i+1}.{format}")
+            image.save(output_path, format.upper())
+            output_files.append(output_path)
+            
+            if progress_callback:
+                progress_callback(i + 1, total)
+                
+        return output_files
+        
+    except ImportError:
+        raise RuntimeError(
+            "No PDF rendering library installed!\n\n"
+            "Please install PyMuPDF:\n"
+            "   pip install pymupdf"
+        )
 
 
 def images_to_pdf(
