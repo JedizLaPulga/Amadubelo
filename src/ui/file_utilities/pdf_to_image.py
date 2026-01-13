@@ -32,14 +32,14 @@ class PdfToImageView(ToolViewBase):
         
     def _create_content(self):
         """Create the main content area."""
-        content = ctk.CTkFrame(self, fg_color="transparent")
+        # Use scrollable frame to ensure all content is accessible
+        content = ctk.CTkScrollableFrame(self, fg_color="transparent")
         content.grid(row=2, column=0, sticky="nsew", padx=20, pady=10)
         content.grid_columnconfigure(0, weight=1)
-        content.grid_rowconfigure(0, weight=1)
         
         # Main layout frame
         main_frame = ctk.CTkFrame(content, fg_color="transparent")
-        main_frame.grid(row=0, column=0, sticky="nsew")
+        main_frame.grid(row=0, column=0, sticky="ew")
         main_frame.grid_columnconfigure(0, weight=1)
         
         # File drop zone

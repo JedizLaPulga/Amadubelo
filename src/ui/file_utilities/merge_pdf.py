@@ -31,7 +31,7 @@ class MergePdfView(ToolViewBase):
         
     def _create_content(self):
         """Create the main content area."""
-        content = ctk.CTkFrame(self, fg_color="transparent")
+        content = ctk.CTkScrollableFrame(self, fg_color="transparent")
         content.grid(row=2, column=0, sticky="nsew", padx=20, pady=10)
         content.grid_columnconfigure(0, weight=1)
         
