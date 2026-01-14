@@ -23,12 +23,16 @@ def build():
     if not icon_path.exists():
         icon_path = img_dir / "amadubelo.png"
     
+    # Output directory
+    app_dir = root_dir / "app"
+    
     # Build command
     cmd = [
         sys.executable, "-m", "PyInstaller",
         "--onefile",                    # Single exe
         "--windowed",                   # No console
-        "--name", "Amadubelo",
+        "--name", "app",                # Output name is app.exe
+        "--distpath", str(app_dir),     # Output to app folder
         "--add-data", f"{src_dir};src",  # Include source
     ]
     
@@ -49,7 +53,7 @@ def build():
     if result.returncode == 0:
         print()
         print("✅ Build successful!")
-        print(f"📦 Executable: {root_dir / 'dist' / 'Amadubelo.exe'}")
+        print(f"📦 Executable: {app_dir / 'app.exe'}")
     else:
         print()
         print("❌ Build failed!")

@@ -118,7 +118,7 @@ pip install -r requirements.txt
 python build.py
 ```
 
-The executable will be created at `dist/Amadubelo.exe` (~50-80MB)
+The executable will be created at `app/app.exe` (~50-80MB)
 
 ### Build Requirements
 - Python 3.10+
