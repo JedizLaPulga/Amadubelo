@@ -43,7 +43,7 @@ def build():
     # Add the main script
     cmd.append(str(main_script))
     
-    print("🔨 Building Amadubelo...")
+    print("[BUILD] Building Amadubelo...")
     print(f"   Command: {' '.join(cmd)}")
     print()
     
@@ -52,11 +52,11 @@ def build():
     
     if result.returncode == 0:
         print()
-        print("✅ Build successful!")
-        print(f"📦 Executable: {app_dir / 'app.exe'}")
+        print("[SUCCESS] Build successful!")
+        print(f"[OUTPUT] Executable: {app_dir / 'app.exe'}")
     else:
         print()
-        print("❌ Build failed!")
+        print("[ERROR] Build failed!")
         sys.exit(1)
 
 
