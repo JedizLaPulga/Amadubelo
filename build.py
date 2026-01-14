@@ -33,7 +33,15 @@ def build():
         "--windowed",                   # No console
         "--name", "Amadubelo",          # Output name (avoid 'app' to prevent module conflict)
         "--distpath", str(app_dir),     # Output to app folder
-        "--add-data", f"{src_dir};src",  # Include source
+        "--add-data", f"{src_dir};src",  # Include source as data
+        # Hidden imports to ensure all modules are included
+        "--hidden-import", "app",
+        "--hidden-import", "ui",
+        "--hidden-import", "ui.components",
+        "--hidden-import", "ui.file_utilities",
+        "--hidden-import", "ui.system_utilities",
+        "--hidden-import", "core",
+        "--collect-submodules", "customtkinter",
     ]
     
     # Add icon if exists
