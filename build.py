@@ -31,7 +31,7 @@ def build():
         sys.executable, "-m", "PyInstaller",
         "--onefile",                    # Single exe
         "--windowed",                   # No console
-        "--name", "app",                # Output name is app.exe
+        "--name", "Amadubelo",          # Output name (avoid 'app' to prevent module conflict)
         "--distpath", str(app_dir),     # Output to app folder
         "--add-data", f"{src_dir};src",  # Include source
     ]
@@ -53,7 +53,7 @@ def build():
     if result.returncode == 0:
         print()
         print("[SUCCESS] Build successful!")
-        print(f"[OUTPUT] Executable: {app_dir / 'app.exe'}")
+        print(f"[OUTPUT] Executable: {app_dir / 'Amadubelo.exe'}")
     else:
         print()
         print("[ERROR] Build failed!")
