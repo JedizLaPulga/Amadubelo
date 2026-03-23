@@ -54,6 +54,18 @@ class FileUtilitiesTab(ctk.CTkFrame):
             "title": "Split PDF",
             "description": "Extract pages from PDF"
         },
+        {
+            "id": "image_converter",
+            "icon": "🔄",
+            "title": "Image Converter",
+            "description": "Convert between image formats"
+        },
+        {
+            "id": "qr_generator",
+            "icon": "📱",
+            "title": "QR Code Generator",
+            "description": "Generate QR codes from text"
+        },
     ]
     
     def __init__(self, parent, colors: dict, **kwargs):
@@ -139,6 +151,12 @@ class FileUtilitiesTab(ctk.CTkFrame):
         elif tool_id == "split_pdf":
             from ui.file_utilities.split_pdf import SplitPdfView
             view = SplitPdfView(self.container, self.colors, on_back=self._show_tool_grid)
+        elif tool_id == "image_converter":
+            from ui.file_utilities.image_converter import ImageConverterView
+            view = ImageConverterView(self.container, self.colors, on_back=self._show_tool_grid)
+        elif tool_id == "qr_generator":
+            from ui.file_utilities.qr_generator import QrGeneratorView
+            view = QrGeneratorView(self.container, self.colors, on_back=self._show_tool_grid)
         
         if view:
             view.grid(row=0, column=0, sticky="nsew")
