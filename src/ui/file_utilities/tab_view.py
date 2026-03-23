@@ -66,6 +66,12 @@ class FileUtilitiesTab(ctk.CTkFrame):
             "title": "QR Code Generator",
             "description": "Generate QR codes from text"
         },
+        {
+            "id": "password_generator",
+            "icon": "🔐",
+            "title": "Password Generator",
+            "description": "Generate secure passwords"
+        },
     ]
     
     def __init__(self, parent, colors: dict, **kwargs):
@@ -157,6 +163,9 @@ class FileUtilitiesTab(ctk.CTkFrame):
         elif tool_id == "qr_generator":
             from ui.file_utilities.qr_generator import QrGeneratorView
             view = QrGeneratorView(self.container, self.colors, on_back=self._show_tool_grid)
+        elif tool_id == "password_generator":
+            from ui.file_utilities.password_generator import PasswordGeneratorView
+            view = PasswordGeneratorView(self.container, self.colors, on_back=self._show_tool_grid)
         
         if view:
             view.grid(row=0, column=0, sticky="nsew")
