@@ -48,6 +48,9 @@
 | 📉 **Compress** | Reduce image and PDF file sizes |
 | 🔗 **Merge PDFs** | Combine multiple PDFs into one |
 | ✂️ **Split PDF** | Extract specific pages from a PDF |
+| 🔄 **Image Converter** | Convert between image formats |
+| 📱 **QR Code Generator** | Generate QR codes from text |
+| 🔐 **Password Generator** | Generate secure passwords |
 
 ### 🖥️ System Utilities
 
@@ -62,6 +65,7 @@
 | 📶 **Network Info** | View IP address and network details |
 | 🗑️ **Recycle Bin** | Quick empty recycle bin |
 | 💾 **Drive Analyzer** | Visual breakdown of disk space usage |
+| ⚙️ **Process Manager** | View and manage running processes |
 
 ---
 
