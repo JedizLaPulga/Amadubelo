@@ -66,6 +66,12 @@ class SystemUtilitiesTab(ctk.CTkFrame):
             "title": "Drive Analyzer",
             "description": "Analyze disk space"
         },
+        {
+            "id": "process_manager",
+            "icon": "⚙️",
+            "title": "Process Manager",
+            "description": "View and manage running processes"
+        },
     ]
     
     def __init__(self, parent, colors: dict, **kwargs):
@@ -157,6 +163,9 @@ class SystemUtilitiesTab(ctk.CTkFrame):
         elif tool_id == "drive_analyzer":
             from ui.system_utilities.drive_analyzer import DriveAnalyzerView
             view = DriveAnalyzerView(self.container, self.colors, on_back=self._show_tool_grid)
+        elif tool_id == "process_manager":
+            from ui.system_utilities.process_manager import ProcessManagerView
+            view = ProcessManagerView(self.container, self.colors, on_back=self._show_tool_grid)
         
         if view:
             view.grid(row=0, column=0, sticky="nsew")
